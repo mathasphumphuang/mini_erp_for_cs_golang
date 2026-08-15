@@ -163,3 +163,7 @@ C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\obj\De
 C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\obj\Debug\net10.0\CoreErpService.pdb
 C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\obj\Debug\net10.0\CoreErpService.genruntimeconfig.cache
 C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\obj\Debug\net10.0\ref\CoreErpService.dll
+C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Mathas_Min\Desktop\miniErp\mini_erp_for_cs_golang\CoreErpService\obj\Debug\net10.0\CoreErpService.sourcelink.json

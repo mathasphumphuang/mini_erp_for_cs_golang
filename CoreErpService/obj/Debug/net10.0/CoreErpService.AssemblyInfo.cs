@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CoreErpService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8985c47cbe42bfe54a2ed52e2aa4085872ec469")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+13b669616c61701eb963b8e9a7e37bf2e3b62e32")]
 [assembly: System.Reflection.AssemblyProductAttribute("CoreErpService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CoreErpService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
