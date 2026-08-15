@@ -1,0 +1,6 @@
+@CoreErpService_HostAddress = http://localhost:5186
+
+GET {{CoreErpService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
