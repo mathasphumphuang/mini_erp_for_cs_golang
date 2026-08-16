@@ -1,4 +1,5 @@
 using CoreErpService.Data;
+using CoreErpService.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,9 @@ builder.Services.AddSwaggerGen();
 // 3. เสียบสายเชื่อมต่อ Database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// ✨ เพิ่มบรรทัดนี้ลงไป: ลงทะเบียน Dependency Injection สำหรับ Repository
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
