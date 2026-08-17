@@ -1,12 +1,12 @@
 using CoreErpService.Data;
 using CoreErpService.Models;
+using CoreErpService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CoreErpService.Repositories
 {
-    // สังเกตตรง : ICategoryRepository คือการประกาศว่า Class นี้ขอเซ็นสัญญารับทำงานตามที่ Interface กำหนด
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
@@ -17,23 +17,36 @@ namespace CoreErpService.Repositories
             _context = context;
         }
 
-        // 1. ฟังก์ชันดึงข้อมูลทั้งหมด
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
-            // ไปดึงตาราง Categories ทั้งหมดออกมาเป็น List แบบ Async
-            return await _context.Categories.ToListAsync();
+            return await _context.Categories.ToListAsync(); // ToListAsync() คือการดึงข้อมูลทั้งหมดจากตาราง Categories และแปลงเป็น List ของ Category
         }
 
-        // 2. ฟังก์ชันเพิ่มข้อมูลใหม่
         public async Task<Category> AddAsync(Category category)
         {
-            // เอาข้อมูลใหม่ไปต่อคิวเตรียมบันทึก
-            _context.Categories.Add(category);
+            _context.Categories.Add(category); // Add(...) คือการบอกให้ EF Core เตรียมเพิ่มข้อมูลใหม่ลงในตาราง Categories
             
-            // สั่งยืนยันการบันทึกลง Database จริงๆ (คล้ายๆ การกด Commit)
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); // SaveChangesAsync() คือการบอกให้ EF Core ส่งคำสั่ง SQL ไปยัง Database เพื่อบันทึกการเปลี่ยนแปลงจริง ๆ
             
             return category;
+        }
+        public async Task<Category> GetByIdAsync(int id)
+        {
+            return await _context.Categories.FindAsync(id); // FindAsync(id) คือการค้นหาข้อมูลในตาราง Categories ตาม Primary Key (Id) ที่ส่งมา
+        }
+        public async Task UpdateAsync(Category category)
+        {
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync();
+        }
+        public async Task DeleteAsync(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category != null)
+            {
+                _context.Categories.Remove(category); // Remove(...) คือการบอกให้ EF Core เตรียมลบข้อมูลออกจากตาราง Categories
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

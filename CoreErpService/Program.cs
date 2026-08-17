@@ -1,11 +1,17 @@
 using CoreErpService.Data;
 using CoreErpService.Repositories;
 using Microsoft.EntityFrameworkCore;
+using CoreErpService.Interfaces;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // 1. เพิ่มการรองรับ Controllers (สำคัญมากสำหรับสถาปัตยกรรมแบบองค์กร)
-builder.Services.AddControllers();
+// 💡 แก้บรรทัด AddControllers ให้เป็นแบบนี้เพื่อหยุดการวนลูป
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 // 2. ตั้งค่า Swagger / OpenAPI (สำหรับใช้ทดสอบ API ผ่านหน้าเว็บ)
 // .NET 10 ใช้ AddOpenApi() เป็นค่าเริ่มต้น
@@ -20,6 +26,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // ✨ เพิ่มบรรทัดนี้ลงไป: ลงทะเบียน Dependency Injection สำหรับ Repository
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
