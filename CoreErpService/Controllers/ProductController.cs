@@ -57,7 +57,7 @@ namespace CoreErpService.Controllers
             await _repository.UpdateAsync(product);
             return NoContent();
         }
-        [HttpDelete()]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _repository.GetByIdAsync(id);

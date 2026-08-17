@@ -19,7 +19,7 @@ namespace CoreErpService.Repositories
 
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
-            return await _context.Categories.ToListAsync(); // ToListAsync() คือการดึงข้อมูลทั้งหมดจากตาราง Categories และแปลงเป็น List ของ Category
+            return await _context.Categories.Include(c => c.Products).ToListAsync(); // ToListAsync() คือการดึงข้อมูลทั้งหมดจากตาราง Categories และแปลงเป็น List ของ Category
         }
 
         public async Task<Category> AddAsync(Category category)
@@ -30,9 +30,12 @@ namespace CoreErpService.Repositories
             
             return category;
         }
-        public async Task<Category> GetByIdAsync(int id)
+        // ดึงหมวดหมู่ตาม ID
+        public async Task<Category?> GetByIdAsync(int id)
         {
-            return await _context.Categories.FindAsync(id); // FindAsync(id) คือการค้นหาข้อมูลในตาราง Categories ตาม Primary Key (Id) ที่ส่งมา
+            return await _context.Categories
+                                 .Include(c => c.Products)
+                                 .FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task UpdateAsync(Category category)
         {

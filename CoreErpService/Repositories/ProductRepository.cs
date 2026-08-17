@@ -17,13 +17,16 @@ namespace CoreErpService.Repositories
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products
+            .Include(p => p.Category)
+            .ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetAllByCategoryIdAsync(int categoryId)
         {
             return await _context.Products
                                  .Where(p => p.CategoryId == categoryId)
+                                 .Include(p => p.Category)
                                  .ToListAsync();
         }
         public async Task<Product> AddAsync(Product product)
@@ -34,9 +37,12 @@ namespace CoreErpService.Repositories
 
             return product;
         }
-        public async Task<Product> GetByIdAsync(int id)
+        // ดึงสินค้าตาม ID
+        public async Task<Product?> GetByIdAsync(int id)
         {
-            return await _context.Products.FindAsync(id);
+            return await _context.Products
+                                 .Include(p => p.Category)
+                                 .FirstOrDefaultAsync(p => p.Id == id);
         }
         public async Task UpdateAsync(Product product)
         {
